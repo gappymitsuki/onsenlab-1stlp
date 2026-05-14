@@ -12,10 +12,12 @@ if (typeof window !== "undefined") {
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.4,
+      // Lighter smoothing — `duration: 1.4` reads as "stuck/sluggish".
+      // 0.8 keeps the silk feel without intercepting flicks.
+      duration: 0.8,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      // touch is left native; smoothing on touch feels off
+      wheelMultiplier: 1.1,
       syncTouch: false,
     });
 

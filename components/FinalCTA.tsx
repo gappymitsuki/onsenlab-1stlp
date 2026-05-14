@@ -74,11 +74,10 @@ export default function FinalCTA() {
 
         <Reveal as="p" mode="fade" delay={0.25} className="mt-10">
           <span
-            lang="ja"
-            className="block text-center font-jp font-light text-mist"
-            style={{ fontSize: "clamp(15px, 1.6vw, 22px)", letterSpacing: "0.04em" }}
+            className="block text-center font-serif font-light italic text-mist"
+            style={{ fontSize: "clamp(15px, 1.6vw, 22px)" }}
           >
-            処方箋は、すでに調合の準備に入っています。
+            Your formulation is already in preparation.
           </span>
         </Reveal>
 
@@ -130,12 +129,12 @@ export default function FinalCTA() {
         </p>
 
         {state === "done" && (
-          <p className="mt-6 text-center font-jp text-[14px] font-light text-copper-hot">
+          <p className="mt-6 text-center font-serif text-[14px] font-light text-copper-hot">
             Your spot is held. Check your inbox for the AI Bath Quiz link.
           </p>
         )}
         {state === "error" && (
-          <p className="mt-6 text-center font-jp text-[14px] font-light text-mist">
+          <p className="mt-6 text-center font-serif text-[14px] font-light text-mist">
             Something interrupted the reservation. Please try once more.
           </p>
         )}

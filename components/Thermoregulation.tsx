@@ -106,7 +106,7 @@ export default function Thermoregulation() {
           </div>
 
           <Reveal as="p" mode="fade" delay={0.1} className="mt-12 max-w-sm">
-            <span className="block font-jp font-light leading-[1.85] text-mineral" lang="en">
+            <span className="block font-serif font-light leading-[1.85] text-mineral" lang="en">
               Walker Lab, Stanford School of Medicine. Replicated across 12 peer-reviewed
               sleep studies.
             </span>

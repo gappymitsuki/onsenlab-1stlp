@@ -72,11 +72,10 @@ export default function Hero() {
           <span className="h-px w-20 bg-copper" aria-hidden="true" />
           <Reveal as="p" mode="fade" delay={0.6}>
             <span
-              lang="ja"
-              className="font-jp font-light text-mist"
-              style={{ fontSize: "clamp(15px, 1.6vw, 22px)", letterSpacing: "0.04em" }}
+              className="font-serif font-light italic text-mist"
+              style={{ fontSize: "clamp(15px, 1.6vw, 22px)" }}
             >
-              あなたのための、AI処方温泉。
+              An AI-prescribed onsen protocol, made for you.
             </span>
           </Reveal>
         </div>

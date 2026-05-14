@@ -24,7 +24,7 @@ export default function Footer() {
           <div className="md:col-span-5">
             <Wordmark size="md" tone="washi" />
             <p
-              className="mt-6 font-jp text-[14px] font-light leading-[1.85] text-mist"
+              className="mt-6 font-serif text-[14px] font-light leading-[1.85] text-mist"
               lang="en"
             >
               Sourced in Japan.
@@ -63,7 +63,7 @@ export default function Footer() {
           <p className="font-mono text-[10px] uppercase tracking-mono text-mineral">
             © 2026 ONSEN LAB CO., LTD.
             <br />
-            REG. 〒113-XXXX TOKYO, BUNKYŌ-KU
+            REGISTERED IN TOKYO, BUNKYO-KU
           </p>
           <ul className="flex gap-8">
             {social.map((s) => (

@@ -72,7 +72,7 @@ function Row({ index, q, a }: { index: number; q: string; a: string }) {
             transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
             className="overflow-hidden"
           >
-            <p className="max-w-3xl pb-10 pl-0 font-jp text-[16px] font-light leading-[1.85] text-mineral md:pb-14 md:pl-[88px] md:text-[18px]">
+            <p className="max-w-3xl pb-10 pl-0 font-serif text-[16px] font-light leading-[1.85] text-mineral md:pb-14 md:pl-[88px] md:text-[18px]">
               {a}
             </p>
           </motion.div>

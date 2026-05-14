@@ -312,7 +312,7 @@ function QuestionView({
           {q.prompt}
         </h2>
         {q.subtitle && (
-          <p className="mt-6 max-w-md font-jp text-[14px] font-light leading-relaxed text-mist md:text-[15px]">
+          <p className="mt-6 max-w-md font-serif text-[14px] font-light leading-relaxed text-mist md:text-[15px]">
             {q.subtitle}
           </p>
         )}
@@ -325,7 +325,7 @@ function QuestionView({
           <TimeField value={value as string | undefined} onSubmit={onSubmit} />
         )}
         {q.kind === "slider" && (
-          <SliderField value={value as number | undefined} onAnswer={onAnswer} />
+          <SliderField value={value as number | undefined} onSubmit={onSubmit} />
         )}
         {q.kind === "email" && (
           <EmailField
@@ -418,10 +418,10 @@ function TimeField({
 
 function SliderField({
   value,
-  onAnswer,
+  onSubmit,
 }: {
   value: number | undefined;
-  onAnswer: (v: number) => void;
+  onSubmit: (v: number) => void;
 }) {
   const [local, setLocal] = useState<number>(value ?? 5);
   return (
@@ -450,7 +450,7 @@ function SliderField({
       </div>
       <button
         type="button"
-        onClick={() => onAnswer(local)}
+        onClick={() => onSubmit(local)}
         className="group inline-flex w-fit items-center border border-washi px-6 py-4 font-mono text-[10px] uppercase tracking-mono text-washi transition-colors duration-200 hover:border-copper"
       >
         <span>Continue</span>
@@ -585,7 +585,7 @@ function EndScreen({ position }: { position: number | null }) {
               className="mt-20 max-w-2xl"
             >
               <div className="h-px w-full bg-ash" />
-              <p className="mt-8 font-jp text-[15px] font-light leading-relaxed text-mist md:text-[17px]">
+              <p className="mt-8 font-serif text-[15px] font-light leading-relaxed text-mist md:text-[17px]">
                 Share to skip the line — every referral moves you up 50 spots.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">

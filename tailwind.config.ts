@@ -33,14 +33,12 @@ const config: Config = {
       fontFamily: {
         display: ["var(--font-fraunces)", "Fraunces", "Editorial New", "GT Sectra Display", "serif"],
         serif: ["var(--font-fraunces)", "Fraunces", "Source Serif 4", "serif"],
-        jp: ["var(--font-shippori-mincho)", "Shippori Mincho", "Noto Serif JP", "serif"],
         mono: ["var(--font-jetbrains-mono)", "JetBrains Mono", "monospace"],
         sans: ["var(--font-jetbrains-mono)", "JetBrains Mono", "monospace"],
       },
       letterSpacing: {
         display: "-0.04em",
         tight: "-0.02em",
-        jp: "0.04em",
         caption: "0.12em",
         mono: "0.2em",
       },
@@ -48,7 +46,6 @@ const config: Config = {
         monolith: "0.92",
         display: "0.98",
         body: "1.55",
-        jp: "1.85",
       },
       fontSize: {
         // Modular scale 1.333 perfect-fourth (clamp)

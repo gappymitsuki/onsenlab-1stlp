@@ -212,23 +212,23 @@ export default function Quiz() {
   }
 
   return (
-    <div className="relative flex min-h-[100svh] w-full flex-col bg-bg-base text-text-primary">
+    <div className="relative flex min-h-[100svh] w-full flex-col bg-sumi text-washi">
       {/* Header — progress bar + step counter */}
-      <header className="sticky top-0 z-20 w-full border-b border-line bg-bg-base">
+      <header className="sticky top-0 z-20 w-full border-b border-ash bg-sumi">
         <div className="mx-auto flex max-w-[1440px] items-center justify-between px-6 py-5 md:px-12">
           <Link
             href="/"
-            className="font-sans text-[16px] font-extralight tracking-tight text-text-primary transition-colors duration-200 hover:text-accent md:text-[18px]"
+            className="font-display text-[16px] font-light tracking-tight text-washi transition-colors duration-200 hover:text-copper md:text-[18px]"
           >
-            Onsen Labo
+            Onsen Lab
           </Link>
-          <span className="font-mono text-caption uppercase tracking-caption text-text-secondary md:text-caption-lg">
+          <span className="font-mono text-[10px] uppercase tracking-mono text-mist md:text-[11px]">
             {String(state.step + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
           </span>
         </div>
-        <div className="h-px w-full bg-line">
+        <div className="h-px w-full bg-ash">
           <motion.div
-            className="h-px bg-accent"
+            className="h-px bg-copper"
             initial={false}
             animate={{ width: `${progress * 100}%` }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
@@ -268,20 +268,20 @@ export default function Quiz() {
       </div>
 
       {/* Footer — back link */}
-      <footer className="w-full border-t border-line">
+      <footer className="w-full border-t border-ash">
         <div className="mx-auto flex max-w-[1440px] items-center justify-between px-6 py-5 md:px-12">
           <button
             type="button"
             onClick={() => dispatch({ type: "back" })}
             disabled={state.step === 0}
-            className="group inline-flex items-center font-mono text-caption uppercase tracking-caption text-text-secondary transition-colors duration-200 hover:text-accent disabled:cursor-not-allowed disabled:opacity-30 md:text-caption-lg"
+            className="group inline-flex items-center font-mono text-[10px] uppercase tracking-mono text-mist transition-colors duration-200 hover:text-copper disabled:cursor-not-allowed disabled:opacity-30 md:text-[11px]"
           >
             <span className="mr-2 transition-transform duration-200 group-hover:-translate-x-1">
               ←
             </span>
             Back
           </button>
-          <span className="font-mono text-caption uppercase tracking-caption text-text-tertiary md:text-caption-lg">
+          <span className="font-mono text-[10px] uppercase tracking-mono text-mineral md:text-[11px]">
             ~ 90 SECONDS
           </span>
         </div>
@@ -308,11 +308,11 @@ function QuestionView({
   return (
     <div className="grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-16">
       <div className="md:col-span-5">
-        <h2 className="font-sans text-[28px] font-extralight leading-[1.15] tracking-tight text-text-primary md:text-[40px]">
+        <h2 className="font-display text-[28px] font-light leading-[1.15] tracking-tight text-washi md:text-[40px]">
           {q.prompt}
         </h2>
         {q.subtitle && (
-          <p className="mt-6 max-w-md font-serif text-[14px] font-light leading-relaxed text-text-secondary md:text-[15px]">
+          <p className="mt-6 max-w-md font-jp text-[14px] font-light leading-relaxed text-mist md:text-[15px]">
             {q.subtitle}
           </p>
         )}
@@ -356,15 +356,15 @@ function ChoiceField({
             key={opt}
             type="button"
             onClick={() => onAnswer(opt)}
-            className={`group relative flex items-center border px-6 py-5 text-left font-sans text-[16px] font-light leading-snug transition-colors duration-200 md:py-6 md:text-[18px] ${
+            className={`group relative flex items-center border px-6 py-5 text-left font-display text-[16px] font-light leading-snug transition-colors duration-200 md:py-6 md:text-[18px] ${
               selected
-                ? "border-accent text-text-primary"
-                : "border-line text-text-secondary hover:border-text-secondary hover:text-text-primary"
+                ? "border-copper text-washi"
+                : "border-ash text-mist hover:border-mist hover:text-washi"
             }`}
           >
             <span
               className={`absolute left-0 top-0 h-full w-[2px] transition-opacity duration-200 ${
-                selected ? "bg-accent opacity-100" : "bg-accent opacity-0"
+                selected ? "bg-copper opacity-100" : "bg-copper opacity-0"
               }`}
               aria-hidden="true"
             />
@@ -393,19 +393,19 @@ function TimeField({
       className="flex flex-col gap-8"
     >
       <label className="block">
-        <span className="font-mono text-caption uppercase tracking-caption text-text-secondary md:text-caption-lg">
+        <span className="font-mono text-[10px] uppercase tracking-mono text-mist md:text-[11px]">
           BEDTIME
         </span>
         <input
           type="time"
           value={local}
           onChange={(e) => setLocal(e.target.value)}
-          className="mt-4 w-full border-b border-line bg-transparent py-4 font-mono text-[28px] font-light text-text-primary focus:border-accent focus:outline-none md:text-[40px]"
+          className="mt-4 w-full border-b border-ash bg-transparent py-4 font-mono text-[28px] font-light text-washi focus:border-copper focus:outline-none md:text-[40px]"
         />
       </label>
       <button
         type="submit"
-        className="group inline-flex w-fit items-center border border-text-primary px-6 py-4 font-mono text-caption uppercase tracking-caption text-text-primary transition-colors duration-200 hover:border-accent"
+        className="group inline-flex w-fit items-center border border-washi px-6 py-4 font-mono text-[10px] uppercase tracking-mono text-washi transition-colors duration-200 hover:border-copper"
       >
         <span>Continue</span>
         <span className="ml-3 transition-transform duration-200 group-hover:translate-x-1">
@@ -428,13 +428,13 @@ function SliderField({
     <div className="flex flex-col gap-10">
       <div>
         <div className="flex items-end justify-between">
-          <span className="font-mono text-caption uppercase tracking-caption text-text-tertiary md:text-caption-lg">
+          <span className="font-mono text-[10px] uppercase tracking-mono text-mineral md:text-[11px]">
             LOW
           </span>
-          <span className="font-mono text-[40px] font-light text-accent md:text-[64px]">
+          <span className="font-mono text-[40px] font-light text-copper md:text-[64px]">
             {local}
           </span>
-          <span className="font-mono text-caption uppercase tracking-caption text-text-tertiary md:text-caption-lg">
+          <span className="font-mono text-[10px] uppercase tracking-mono text-mineral md:text-[11px]">
             HIGH
           </span>
         </div>
@@ -451,7 +451,7 @@ function SliderField({
       <button
         type="button"
         onClick={() => onAnswer(local)}
-        className="group inline-flex w-fit items-center border border-text-primary px-6 py-4 font-mono text-caption uppercase tracking-caption text-text-primary transition-colors duration-200 hover:border-accent"
+        className="group inline-flex w-fit items-center border border-washi px-6 py-4 font-mono text-[10px] uppercase tracking-mono text-washi transition-colors duration-200 hover:border-copper"
       >
         <span>Continue</span>
         <span className="ml-3 transition-transform duration-200 group-hover:translate-x-1">
@@ -481,7 +481,7 @@ function EmailField({
       className="flex flex-col gap-10"
     >
       <label className="block">
-        <span className="font-mono text-caption uppercase tracking-caption text-text-secondary md:text-caption-lg">
+        <span className="font-mono text-[10px] uppercase tracking-mono text-mist md:text-[11px]">
           NAME (OPTIONAL)
         </span>
         <input
@@ -489,11 +489,11 @@ function EmailField({
           value={name}
           onChange={(e) => setName(e.target.value)}
           autoComplete="given-name"
-          className="mt-4 w-full border-b border-line bg-transparent py-4 font-sans text-[18px] font-light text-text-primary focus:border-accent focus:outline-none md:text-[22px]"
+          className="mt-4 w-full border-b border-ash bg-transparent py-4 font-display text-[18px] font-light text-washi focus:border-copper focus:outline-none md:text-[22px]"
         />
       </label>
       <label className="block">
-        <span className="font-mono text-caption uppercase tracking-caption text-text-secondary md:text-caption-lg">
+        <span className="font-mono text-[10px] uppercase tracking-mono text-mist md:text-[11px]">
           EMAIL
         </span>
         <input
@@ -502,12 +502,12 @@ function EmailField({
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           autoComplete="email"
-          className="mt-4 w-full border-b border-line bg-transparent py-4 font-sans text-[18px] font-light text-text-primary focus:border-accent focus:outline-none md:text-[22px]"
+          className="mt-4 w-full border-b border-ash bg-transparent py-4 font-display text-[18px] font-light text-washi focus:border-copper focus:outline-none md:text-[22px]"
         />
       </label>
       <button
         type="submit"
-        className="group inline-flex w-fit items-center border border-text-primary px-6 py-4 font-mono text-caption uppercase tracking-caption text-text-primary transition-colors duration-200 hover:border-accent"
+        className="group inline-flex w-fit items-center border border-washi px-6 py-4 font-mono text-[10px] uppercase tracking-mono text-washi transition-colors duration-200 hover:border-copper"
       >
         <span>Reserve my prescription</span>
         <span className="ml-3 transition-transform duration-200 group-hover:translate-x-1">
@@ -546,30 +546,30 @@ function EndScreen({ position }: { position: number | null }) {
   }, [position]);
 
   return (
-    <div className="relative flex min-h-[100svh] w-full flex-col items-stretch justify-center bg-bg-base text-text-primary">
+    <div className="relative flex min-h-[100svh] w-full flex-col items-stretch justify-center bg-sumi text-washi">
       <div className="mx-auto w-full max-w-[1440px] px-6 py-24 md:px-12">
         <div className="relative overflow-hidden">
           <motion.div
-            className="absolute left-0 top-0 h-px bg-accent"
+            className="absolute left-0 top-0 h-px bg-copper"
             initial={{ width: 0 }}
             animate={{ width: "100%" }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           />
           <div className="pt-8">
-            <p className="font-mono text-caption uppercase tracking-caption text-text-secondary md:text-caption-lg">
+            <p className="font-mono text-[10px] uppercase tracking-mono text-mist md:text-[11px]">
               PRESCRIPTION RESERVED
             </p>
-            <h1 className="mt-10 font-sans text-[40px] font-extralight leading-[1.05] tracking-tight text-text-primary md:text-[80px]">
+            <h1 className="mt-10 font-display text-[40px] font-light leading-[1.05] tracking-tight text-washi md:text-[80px]">
               Your prescription is reserved.
             </h1>
             <div className="mt-12 flex flex-col gap-2">
-              <span className="font-mono text-caption uppercase tracking-caption text-text-secondary md:text-caption-lg">
+              <span className="font-mono text-[10px] uppercase tracking-mono text-mist md:text-[11px]">
                 YOU ARE
               </span>
-              <span className="font-mono text-[56px] font-light leading-none text-accent md:text-[96px]">
+              <span className="font-mono text-[56px] font-light leading-none text-copper md:text-[96px]">
                 #{counter.toLocaleString()}
               </span>
-              <span className="font-mono text-caption uppercase tracking-caption text-text-tertiary md:text-caption-lg">
+              <span className="font-mono text-[10px] uppercase tracking-mono text-mineral md:text-[11px]">
                 ON THE WAITLIST · ESTIMATED DELIVERY Q3 2026
               </span>
             </div>
@@ -584,8 +584,8 @@ function EndScreen({ position }: { position: number | null }) {
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
               className="mt-20 max-w-2xl"
             >
-              <div className="h-px w-full bg-line" />
-              <p className="mt-8 font-serif text-[15px] font-light leading-relaxed text-text-secondary md:text-[17px]">
+              <div className="h-px w-full bg-ash" />
+              <p className="mt-8 font-jp text-[15px] font-light leading-relaxed text-mist md:text-[17px]">
                 Share to skip the line — every referral moves you up 50 spots.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
@@ -599,7 +599,7 @@ function EndScreen({ position }: { position: number | null }) {
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group inline-flex items-center border border-line px-5 py-3 font-mono text-caption uppercase tracking-caption text-text-secondary transition-colors duration-200 hover:border-accent hover:text-accent"
+                    className="group inline-flex items-center border border-ash px-5 py-3 font-mono text-[10px] uppercase tracking-mono text-mist transition-colors duration-200 hover:border-copper hover:text-copper"
                   >
                     {s.label}
                     <span className="ml-3 transition-transform duration-200 group-hover:translate-x-1">
@@ -611,12 +611,12 @@ function EndScreen({ position }: { position: number | null }) {
               <div className="mt-16">
                 <Link
                   href="/"
-                  className="group inline-flex items-center font-mono text-caption uppercase tracking-caption text-text-tertiary transition-colors duration-200 hover:text-accent"
+                  className="group inline-flex items-center font-mono text-[10px] uppercase tracking-mono text-mineral transition-colors duration-200 hover:text-copper"
                 >
                   <span className="mr-2 transition-transform duration-200 group-hover:-translate-x-1">
                     ←
                   </span>
-                  Return to Onsen Labo
+                  Return to Onsen Lab
                 </Link>
               </div>
             </motion.div>

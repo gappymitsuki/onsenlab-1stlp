@@ -3,52 +3,143 @@
 @tailwind utilities;
 
 :root {
-  --bg-base: #0A0908;
-  --bg-elevated: #14110F;
-  --text-primary: #F5F1EA;
-  --text-secondary: #8B8680;
-  --text-tertiary: #4A4642;
-  --accent: #C9A961;
-  --line: #2A2622;
+  /* Base layer */
+  --color-sumi: #0a0908;
+  --color-sumi-deep: #050403;
+  --color-stone: #1c1a17;
+  --color-stone-mid: #2a2620;
+  --color-ash: #3d3833;
+
+  /* Paper layer */
+  --color-washi: #f2ede4;
+  --color-yunohana: #e8dfd0;
+  --color-bone: #dcd3c3;
+
+  /* Copper accent */
+  --color-copper: #b87333;
+  --color-copper-hot: #c8956d;
+  --color-copper-leaf: #8b5a2b;
+
+  /* Information layer */
+  --color-mist: #a8a39d;
+  --color-mineral: #6e6862;
+
+  /* Easings */
+  --ease-onsen-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-onsen-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-onsen-mineral: cubic-bezier(0.83, 0, 0.17, 1);
 }
 
 html,
 body {
-  background-color: var(--bg-base);
-  color: var(--text-primary);
-  font-family: var(--font-inter), Inter, system-ui, sans-serif;
+  background-color: var(--color-sumi);
+  color: var(--color-washi);
+  font-family: var(--font-fraunces), "Fraunces", serif;
   font-weight: 300;
+  font-feature-settings: "ss01", "ss02", "liga", "kern";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
 
 ::selection {
-  background: var(--accent);
-  color: var(--bg-base);
+  background: var(--color-copper);
+  color: var(--color-sumi);
 }
 
-/* Custom focus ring — 1px accent outline, no default browser blue. */
+/* Tabular numerics for any element marked .tnum */
+.tnum,
+.font-mono {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Focus ring — 2px copper outline */
 *:focus {
   outline: none;
 }
 *:focus-visible {
-  outline: 1px solid var(--accent);
-  outline-offset: 2px;
+  outline: 2px solid var(--color-copper);
+  outline-offset: 3px;
 }
 
-/* Disable iOS tap highlight */
 * {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Slider — used in quiz Q7 */
+/* Hide native cursor on devices that have a fine pointer (we render our own).
+   Touch devices keep their native interactions. */
+@media (hover: hover) and (pointer: fine) {
+  html.has-custom-cursor,
+  html.has-custom-cursor * {
+    cursor: none !important;
+  }
+}
+
+/* Lenis smooth scroll required setup */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Marquee */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  display: inline-flex;
+  white-space: nowrap;
+  will-change: transform;
+  animation: marquee 60s linear infinite;
+}
+
+/* Hairline divider helper */
+.hairline {
+  background-color: var(--color-ash);
+  height: 1px;
+  width: 100%;
+}
+.hairline-bone {
+  background-color: var(--color-bone);
+  height: 1px;
+  width: 100%;
+}
+
+/* Reveal mask used by Reveal.tsx */
+.reveal-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+.reveal-line {
+  display: block;
+  transform: translateY(110%);
+  will-change: transform;
+}
+
+/* Range slider used in quiz */
 input[type="range"].onsen-slider {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
   height: 1px;
-  background: var(--line);
+  background: var(--color-ash);
   outline: none;
 }
 input[type="range"].onsen-slider::-webkit-slider-thumb {
@@ -56,24 +147,28 @@ input[type="range"].onsen-slider::-webkit-slider-thumb {
   appearance: none;
   width: 14px;
   height: 14px;
-  background: var(--accent);
-  cursor: pointer;
+  background: var(--color-copper);
+  cursor: none;
   border: 0;
 }
 input[type="range"].onsen-slider::-moz-range-thumb {
   width: 14px;
   height: 14px;
-  background: var(--accent);
-  cursor: pointer;
+  background: var(--color-copper);
+  cursor: none;
   border: 0;
 }
 
-/* prefers-reduced-motion: opacity-only transitions at 300ms */
+/* prefers-reduced-motion: kill all motion */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 300ms !important;
-    transition-property: opacity !important;
+    transition-duration: 0ms !important;
+  }
+  .marquee-track {
+    animation: none !important;
   }
 }

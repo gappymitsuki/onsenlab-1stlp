@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
+import Reveal from "./Reveal";
 
 const faqs: { q: string; a: string }[] = [
   {
@@ -10,11 +11,11 @@ const faqs: { q: string; a: string }[] = [
   },
   {
     q: "What if I don't have a bathtub?",
-    a: "Roughly 60% of our early waitlist ships in the United States, where shower-only households are common. Our shower steamer formulations deliver the same mineral and aromatic protocol via warm-steam transdermal delivery. Quiz Q3 routes you to the correct format automatically.",
+    a: "Roughly 60% of our early waitlist ships in markets where shower-only households are common. Our shower-steamer formulations deliver the same mineral and aromatic protocol via warm-steam transdermal delivery. Quiz Q3 routes you to the correct format automatically.",
   },
   {
-    q: "How is Onsen Labo different from LUSH?",
-    a: "LUSH sells a bath as entertainment. Onsen Labo sells a bath as a measurable input to sleep quality. Our formulations contain no synthetic dyes, no glitter, no fragrance load designed for retail-shelf appeal. Every component has a function and a citation.",
+    q: "How is Onsen Lab different from LUSH?",
+    a: "LUSH sells a bath as entertainment. Onsen Lab sells a bath as a measurable input to sleep quality. Our formulations contain no synthetic dyes, no glitter, no fragrance load designed for retail-shelf appeal. Every component has a function and a citation.",
   },
   {
     q: "Is the sleep science real?",
@@ -34,25 +35,30 @@ const faqs: { q: string; a: string }[] = [
   },
 ];
 
-function Row({ q, a }: { q: string; a: string }) {
+function Row({ index, q, a }: { index: number; q: string; a: string }) {
   const [open, setOpen] = useState(false);
   return (
-    <li className="border-b border-line">
+    <li className="border-b border-bone">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className="group flex w-full items-center justify-between gap-6 py-8 text-left transition-colors duration-200 md:py-10"
+        data-cursor-label={open ? "CLOSE" : "OPEN"}
+        className="group flex w-full items-baseline gap-6 py-10 text-left md:gap-10 md:py-12"
       >
-        <span className="font-sans text-[18px] font-light leading-snug text-text-primary md:text-[22px]">
+        <span className="shrink-0 font-mono text-[10px] uppercase tracking-mono text-mineral tnum">
+          Q.{String(index + 1).padStart(2, "0")}
+        </span>
+        <span
+          className="flex-1 font-display font-light leading-[1.15] tracking-tight text-sumi"
+          style={{ fontSize: "clamp(20px, 2.4vw, 32px)" }}
+        >
           {q}
         </span>
         <span
           aria-hidden="true"
-          className="shrink-0 font-mono text-[18px] font-light text-text-secondary transition-all duration-300 group-hover:text-accent"
-          style={{
-            transform: open ? "rotate(45deg)" : "rotate(0deg)",
-          }}
+          className="shrink-0 font-mono text-[20px] font-light text-sumi transition-transform duration-medium ease-onsen-out"
+          style={{ transform: open ? "rotate(45deg)" : "rotate(0deg)" }}
         >
           +
         </span>
@@ -63,10 +69,10 @@ function Row({ q, a }: { q: string; a: string }) {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
             className="overflow-hidden"
           >
-            <p className="max-w-2xl pb-10 font-serif text-[15px] font-light leading-relaxed text-text-secondary md:text-[17px]">
+            <p className="max-w-3xl pb-10 pl-0 font-jp text-[16px] font-light leading-[1.85] text-mineral md:pb-14 md:pl-[88px] md:text-[18px]">
               {a}
             </p>
           </motion.div>
@@ -78,14 +84,26 @@ function Row({ q, a }: { q: string; a: string }) {
 
 export default function FAQ() {
   return (
-    <section className="relative w-full border-t border-line bg-bg-base">
-      <div className="mx-auto max-w-[1440px] px-6 py-24 md:px-[120px] md:py-[160px]">
-        <p className="mb-16 font-mono text-caption uppercase tracking-caption text-text-secondary md:mb-24 md:text-caption-lg">
+    <section
+      id="faq"
+      className="relative w-full bg-washi text-sumi border-t border-bone"
+    >
+      <div className="mx-auto max-w-[1920px] px-6 py-32 md:px-[clamp(48px,6vw,120px)] md:py-[200px]">
+        <span className="font-mono text-[10px] uppercase tracking-mono text-mineral">
           QUESTIONS
-        </p>
-        <ul>
-          {faqs.map((f) => (
-            <Row key={f.q} q={f.q} a={f.a} />
+        </span>
+        <h2
+          className="mt-8 max-w-3xl font-display font-light leading-[1.02] tracking-tight text-sumi"
+          style={{ fontSize: "clamp(40px, 7vw, 96px)" }}
+        >
+          <Reveal as="span" mode="lines" duration={1.2}>
+            Things you may reasonably ask before submersion.
+          </Reveal>
+        </h2>
+
+        <ul className="mt-20 md:mt-32 border-t border-bone">
+          {faqs.map((f, i) => (
+            <Row key={f.q} index={i} q={f.q} a={f.a} />
           ))}
         </ul>
       </div>

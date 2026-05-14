@@ -1,18 +1,23 @@
 import type { Metadata } from "next";
-import { Inter, Noto_Serif_JP, JetBrains_Mono } from "next/font/google";
+import { Fraunces, Shippori_Mincho, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
+// Fraunces stands in for Editorial New / GT Sectra (OSS fallback per spec).
+const fraunces = Fraunces({
   subsets: ["latin"],
-  weight: ["200", "300", "400", "500"],
-  variable: "--font-inter",
+  // Variable axis font — weight is controlled per-element via Tailwind
+  // utility classes (font-light, font-medium, etc.).
+  weight: "variable",
+  style: ["normal", "italic"],
+  variable: "--font-fraunces",
   display: "swap",
+  axes: ["opsz"],
 });
 
-const notoSerifJp = Noto_Serif_JP({
+const shipporiMincho = Shippori_Mincho({
   subsets: ["latin"],
-  weight: ["300", "400"],
-  variable: "--font-noto-serif-jp",
+  weight: ["400", "500"],
+  variable: "--font-shippori-mincho",
   display: "swap",
 });
 
@@ -24,15 +29,16 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Onsen Labo — Your sleep, prescribed.",
+  title: "Onsen Lab — Sleep, prescribed.",
   description:
-    "AI-personalized Japanese onsen bath rituals for sleep, stress, and recovery. Join 12,847 on the waitlist.",
+    "An AI-prescribed onsen protocol for sleep, sourced from five protected Japanese hot springs. Join 12,847 reservations.",
   openGraph: {
-    title: "Onsen Labo — Your sleep, prescribed.",
+    title: "Onsen Lab — Sleep, prescribed.",
     description:
-      "AI-personalized Japanese onsen bath rituals for sleep, stress, and recovery.",
+      "The world's first AI-prescribed mineral bath protocol. Sourced from five protected onsens.",
     type: "website",
   },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({
@@ -43,11 +49,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${notoSerifJp.variable} ${jetBrainsMono.variable}`}
+      className={`${fraunces.variable} ${shipporiMincho.variable} ${jetBrainsMono.variable}`}
     >
-      <body className="bg-bg-base text-text-primary antialiased">
-        {children}
-      </body>
+      <body className="bg-sumi text-washi antialiased">{children}</body>
     </html>
   );
 }

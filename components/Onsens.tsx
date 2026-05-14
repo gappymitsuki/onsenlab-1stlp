@@ -1,6 +1,7 @@
 "use client";
 
 import Reveal from "./Reveal";
+import VelocityMarquee from "./VelocityMarquee";
 
 const sources = [
   { name: "KUSATSU", lat: "36.622° N", pH: "2.08" },
@@ -91,32 +92,12 @@ export default function Onsens() {
         </div>
       </div>
 
-      {/* Marquee — slow one-direction scroll, outline-only display type */}
-      <div
-        aria-hidden="true"
-        className="relative w-full overflow-hidden border-t border-ash py-6 md:py-12"
-      >
-        <div className="marquee-track">
-          {[0, 1].map((dup) => (
-            <div key={dup} className="flex shrink-0 items-center">
-              {marqueeNames.concat(marqueeNames).map((n, idx) => (
-                <span
-                  key={`${dup}-${idx}`}
-                  className="mx-12 font-display font-light leading-none"
-                  style={{
-                    fontSize: "clamp(72px, 10vw, 144px)",
-                    WebkitTextFillColor: "transparent",
-                    WebkitTextStroke: "1px var(--color-ash)",
-                    color: "transparent",
-                  }}
-                >
-                  {n}
-                </span>
-              ))}
-            </div>
-          ))}
-        </div>
-      </div>
+      {/* Velocity-bound marquee — base drift accelerates with scroll velocity */}
+      <VelocityMarquee
+        words={marqueeNames}
+        className="border-t border-ash py-6 md:py-12"
+        baseSpeed={-0.4}
+      />
     </section>
   );
 }

@@ -7,7 +7,7 @@ import Reveal from "./Reveal";
 export default function Hero() {
   return (
     <section className="relative h-[100svh] w-full overflow-hidden bg-sumi text-washi">
-      {/* z-0: WebGL placeholder steam field */}
+      {/* z-0: WebGL Curl-noise steam field (with reduced-motion fallback) */}
       <SteamField />
 
       {/* z-1: V1 cinematic plate — water sliding across wet basalt.
@@ -33,8 +33,18 @@ export default function Hero() {
         aria-hidden="true"
       />
 
-      {/* Hairline frame */}
-      <div className="pointer-events-none absolute inset-x-0 top-[88px] h-px bg-ash" aria-hidden="true" />
+      {/* TASK-12 — Left 2px copper rail spanning the hero (after header) */}
+      <div
+        className="pointer-events-none absolute left-6 top-[120px] hidden w-[2px] bg-copper md:block md:left-[clamp(48px,6vw,120px)]"
+        style={{ height: "calc(100% - 160px)" }}
+        aria-hidden="true"
+      />
+
+      {/* Hairline above content */}
+      <div
+        className="pointer-events-none absolute inset-x-0 top-[88px] h-px bg-ash"
+        aria-hidden="true"
+      />
 
       {/* Top-right tape — waitlist + batch */}
       <div className="absolute right-6 top-[120px] z-10 flex flex-col items-end gap-2 md:right-[clamp(48px,6vw,120px)] md:top-[140px]">
@@ -48,16 +58,17 @@ export default function Hero() {
       </div>
 
       {/* Bottom-left content cluster */}
-      <div className="relative z-10 flex h-full flex-col justify-end px-6 pb-20 md:px-[clamp(48px,6vw,120px)] md:pb-[12vh]">
+      <div className="relative z-10 flex h-full flex-col justify-end px-6 pb-20 md:px-[clamp(72px,7vw,148px)] md:pb-[12vh]">
         <Reveal as="p" mode="fade" delay={0.1}>
           <span className="block font-mono text-[10px] uppercase tracking-mono text-copper">
             ONSEN LAB · SLEEP-TECH PROTOCOL · v1 · EST. 2026 · TOKYO
           </span>
         </Reveal>
 
+        {/* TASK-10 — Monolith Hero type up to 220px at 1920px */}
         <h1
-          className="mt-10 max-w-[1100px] font-display leading-monolith tracking-display text-washi"
-          style={{ fontSize: "clamp(64px, 14vw, 220px)" }}
+          className="mt-10 max-w-[1280px] font-display font-light leading-[0.92] tracking-display text-washi"
+          style={{ fontSize: "clamp(72px, 14vw, 220px)" }}
         >
           <Reveal as="span" mode="words" stagger={0.05} duration={1.4}>
             Sleep,
@@ -104,28 +115,30 @@ export default function Hero() {
         </Reveal>
       </div>
 
-      {/* Bottom-right scroll indicator — vertical hairline + traveling copper dot */}
+      {/* TASK-12 — Bottom-right falling-light scroll indicator */}
       <div
-        className="pointer-events-none absolute bottom-12 right-6 z-10 hidden flex-col items-center md:right-[clamp(48px,6vw,120px)] md:flex"
+        className="pointer-events-none absolute bottom-12 right-6 z-10 hidden flex-col items-center gap-4 md:right-[clamp(48px,6vw,120px)] md:flex"
         aria-hidden="true"
       >
-        <span className="relative block h-[120px] w-px overflow-hidden bg-mist/40">
-          <span
-            className="absolute left-1/2 -translate-x-1/2"
+        <div className="relative h-[120px] w-px overflow-hidden bg-mist/40">
+          <div
+            className="absolute left-0 w-px bg-copper"
             style={{
-              top: "-10%",
-              width: 6,
-              height: 6,
-              background: "var(--color-copper)",
-              animation: "scroll-dot 3.2s linear infinite",
+              height: 24,
+              top: -24,
+              animation: "fallingLight 3.2s cubic-bezier(0.83, 0, 0.17, 1) infinite",
             }}
           />
+        </div>
+        <span className="font-mono text-[10px] uppercase tracking-mono text-mist">
+          SCROLL
         </span>
-        <span className="mt-4 font-mono text-[10px] uppercase tracking-mono text-mist">SCROLL</span>
         <style>{`
-          @keyframes scroll-dot {
-            from { top: -10%; }
-            to   { top: 110%; }
+          @keyframes fallingLight {
+            0%   { transform: translateY(0);     opacity: 0; }
+            18%  { opacity: 1; }
+            82%  { opacity: 1; }
+            100% { transform: translateY(144px); opacity: 0; }
           }
         `}</style>
       </div>

@@ -1,7 +1,13 @@
 "use client";
 
+// TASK-05 (modified) — vertical stack (no pin horizontal per user request),
+// but the outline numerals are filled with copper via clip-path tied to each
+// step's scroll progress through the viewport.
+
 import Link from "next/link";
+import { useEffect, useRef } from "react";
 import Reveal from "./Reveal";
+import { gsap, ScrollTrigger } from "@/lib/gsap-init";
 
 const steps = [
   {
@@ -25,12 +31,42 @@ const steps = [
 ];
 
 export default function Process() {
+  const root = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const el = root.current;
+    if (!el) return;
+
+    const ctx = gsap.context(() => {
+      const triggers: ScrollTrigger[] = [];
+      el.querySelectorAll<HTMLElement>(".step").forEach((step) => {
+        const fill = step.querySelector<HTMLElement>(".numeral-fill");
+        if (!fill) return;
+        const st = ScrollTrigger.create({
+          trigger: step,
+          start: "top 75%",
+          end: "bottom 25%",
+          scrub: 0.6,
+          onUpdate: (self) => {
+            const inset = 100 - self.progress * 100;
+            fill.style.clipPath = `inset(${inset}% 0 0 0)`;
+          },
+        });
+        triggers.push(st);
+      });
+      return () => triggers.forEach((t) => t.kill());
+    }, el);
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section
+      ref={root}
       id="process"
       className="relative w-full bg-washi text-sumi"
     >
-      <div className="mx-auto max-w-[1920px] px-6 pt-24 md:px-[clamp(48px,6vw,120px)] md:pt-[160px]">
+      <div className="mx-auto max-w-[1920px] px-6 pt-32 md:px-[clamp(48px,6vw,120px)] md:pt-[200px]">
         <span className="font-mono text-[10px] uppercase tracking-mono text-mineral">
           THE PRESCRIPTION PROCESS
         </span>
@@ -40,27 +76,43 @@ export default function Process() {
         {steps.map((s, i) => (
           <li
             key={s.n}
-            className={`relative grid grid-cols-1 items-center gap-12 py-24 md:grid-cols-12 md:gap-16 md:py-[180px] ${
-              i > 0 ? "border-t border-bone" : "border-t border-bone mt-12 md:mt-20"
+            className={`step relative grid grid-cols-1 items-center gap-12 py-24 md:grid-cols-12 md:gap-16 md:py-[200px] ${
+              i > 0 ? "border-t border-bone" : "border-t border-bone mt-12 md:mt-24"
             }`}
           >
-            {/* Outline numeral — left half */}
-            <div className="md:col-span-6 flex items-center justify-center md:justify-start">
-              <span
-                aria-hidden="true"
-                className="font-display font-light leading-none"
-                style={{
-                  fontSize: "clamp(180px, 28vw, 420px)",
-                  WebkitTextFillColor: "transparent",
-                  WebkitTextStroke: "1px var(--color-copper)",
-                  color: "transparent",
-                }}
+            {/* Numeral with scroll-bound copper fill */}
+            <div className="md:col-span-6 relative flex items-center justify-center md:justify-start">
+              <div
+                className="relative leading-none"
+                style={{ fontSize: "clamp(180px, 28vw, 420px)" }}
               >
-                {s.n}
-              </span>
+                {/* Base outline */}
+                <span
+                  aria-hidden="true"
+                  className="block font-display font-light"
+                  style={{
+                    WebkitTextFillColor: "transparent",
+                    WebkitTextStroke: "1px var(--color-copper)",
+                    color: "transparent",
+                  }}
+                >
+                  {s.n}
+                </span>
+                {/* Copper fill clipped from the bottom */}
+                <span
+                  aria-hidden="true"
+                  className="numeral-fill pointer-events-none absolute inset-0 block font-display font-light text-copper"
+                  style={{
+                    clipPath: "inset(100% 0 0 0)",
+                    willChange: "clip-path",
+                  }}
+                >
+                  {s.n}
+                </span>
+              </div>
             </div>
 
-            {/* Copy — right half */}
+            {/* Copy */}
             <div className="md:col-span-5 md:col-start-8">
               <span className="font-mono text-[10px] uppercase tracking-mono text-mineral tnum">
                 STEP {s.n} / 03
@@ -73,7 +125,7 @@ export default function Process() {
                   {s.en}
                 </Reveal>
               </h3>
-              <p className="mt-8 max-w-md font-serif text-[16px] font-light leading-[1.6] text-mineral md:text-[18px]">
+              <p className="mt-8 max-w-md font-serif text-[16px] font-light leading-[1.55] text-mineral md:text-[18px]">
                 {s.body}
               </p>
               <span className="mt-8 inline-block font-mono text-[11px] uppercase tracking-mono text-copper tnum">
@@ -84,7 +136,7 @@ export default function Process() {
         ))}
       </ol>
 
-      <div className="flex justify-center pb-32 md:pb-[200px]">
+      <div className="flex justify-center pb-32 pt-24 md:pb-[240px] md:pt-32">
         <Link
           href="/quiz"
           data-cursor-label="ENTER"

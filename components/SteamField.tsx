@@ -1,74 +1,54 @@
 "use client";
 
-// Placeholder ambient steam layer.
-//
-// TODO (out of scope for first build): replace this with the Three.js +
-// Curl-Noise + Domain-Warping fragment shader specified in §6.1 of the
-// Quiet Volume doctrine. Until then, this CSS-only layer at least
-// communicates the intended chromatic & motion register so the sumi
-// hero never reads as a flat black plate.
-//
-// Implementation choice when the shader lands:
-//   - OGL or react-three/fiber, fragment shader sized to viewport
-//   - Mouse-position uniform with 0.05× lag
-//   - Mobile fallback: 512×512 texture, 30fps cap
-//   - prefers-reduced-motion → static gradient (this component already
-//     renders that fallback today)
+// TASK-03 — WebGL Steam Field
+// Curl-noise + domain-warping fragment shader on a full-viewport plane.
+// Loaded via next/dynamic with ssr:false so r3f never touches the server
+// renderer (which throws ReactCurrentBatchConfig in static export).
+// Mobile and prefers-reduced-motion render a static CSS gradient fallback.
 
-export default function SteamField() {
-  return (
+import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
+
+const SteamCanvas = dynamic(() => import("./SteamCanvas"), {
+  ssr: false,
+  loading: () => (
     <div
       aria-hidden="true"
-      className="absolute inset-0 overflow-hidden pointer-events-none"
-    >
-      {/* Two slow-drifting radial steam plumes */}
-      <div
-        className="absolute -inset-1/4 opacity-60 motion-reduce:hidden"
-        style={{
-          background:
-            "radial-gradient(40% 30% at 30% 70%, rgba(184, 115, 51, 0.10) 0%, rgba(10,9,8,0) 60%), radial-gradient(35% 25% at 70% 40%, rgba(168, 163, 157, 0.08) 0%, rgba(10,9,8,0) 60%)",
-          animation: "steam-drift 32s ease-in-out infinite alternate",
-        }}
-      />
-      <div
-        className="absolute inset-0 opacity-50 motion-reduce:hidden"
-        style={{
-          background:
-            "radial-gradient(50% 40% at 60% 80%, rgba(139, 90, 43, 0.08) 0%, rgba(10,9,8,0) 70%)",
-          animation: "steam-drift 48s ease-in-out infinite alternate-reverse",
-        }}
-      />
-      {/* Static fallback for reduced-motion */}
-      <div
-        className="hidden absolute inset-0 motion-reduce:block"
-        style={{
-          background:
-            "radial-gradient(60% 50% at 50% 70%, rgba(184, 115, 51, 0.10) 0%, rgba(10,9,8,0) 70%)",
-        }}
-      />
-      {/* Subtle film grain via SVG noise */}
-      <svg
-        className="absolute inset-0 h-full w-full opacity-[0.06] mix-blend-overlay"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <filter id="onsen-noise">
-          <feTurbulence
-            type="fractalNoise"
-            baseFrequency="0.9"
-            numOctaves="2"
-            stitchTiles="stitch"
-          />
-          <feColorMatrix type="saturate" values="0" />
-        </filter>
-        <rect width="100%" height="100%" filter="url(#onsen-noise)" />
-      </svg>
+      className="absolute inset-0 pointer-events-none"
+      style={{
+        background:
+          "radial-gradient(60% 50% at 50% 80%, rgba(184,115,51,0.10) 0%, rgba(10,9,8,0) 70%), #0A0908",
+      }}
+    />
+  ),
+});
 
-      <style>{`
-        @keyframes steam-drift {
-          0%   { transform: translate3d(-3%, 2%, 0) scale(1); }
-          100% { transform: translate3d(4%, -2%, 0) scale(1.1); }
-        }
-      `}</style>
+export default function SteamField() {
+  const [enabled, setEnabled] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const tooSmall = window.matchMedia("(max-width: 480px)").matches;
+    if (!reduced && !tooSmall) setEnabled(true);
+  }, []);
+
+  if (!enabled) {
+    return (
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(60% 50% at 50% 80%, rgba(184,115,51,0.10) 0%, rgba(10,9,8,0) 70%), #0A0908",
+        }}
+      />
+    );
+  }
+
+  return (
+    <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+      <SteamCanvas />
     </div>
   );
 }

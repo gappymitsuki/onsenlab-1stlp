@@ -4,6 +4,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import Reveal from "./Reveal";
 
+// The "How is Onsen Lab different from LUSH?" row was removed in favor of
+// a dedicated NotABathBomb section between Onsens and Process — see
+// components/NotABathBomb.tsx. Don't add it back here.
 const faqs: { q: string; a: string }[] = [
   {
     q: "Why does bath formulation need to be personalized?",
@@ -12,10 +15,6 @@ const faqs: { q: string; a: string }[] = [
   {
     q: "What if I don't have a bathtub?",
     a: "Roughly 60% of our early waitlist ships in markets where shower-only households are common. Our shower-steamer formulations deliver the same mineral and aromatic protocol via warm-steam transdermal delivery. Quiz Q3 routes you to the correct format automatically.",
-  },
-  {
-    q: "How is Onsen Lab different from LUSH?",
-    a: "LUSH sells a bath as entertainment. Onsen Lab sells a bath as a measurable input to sleep quality. Our formulations contain no synthetic dyes, no glitter, no fragrance load designed for retail-shelf appeal. Every component has a function and a citation.",
   },
   {
     q: "Is the sleep science real?",

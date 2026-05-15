@@ -4,6 +4,7 @@ import WhyNow from "@/components/WhyNow";
 import Thermoregulation from "@/components/Thermoregulation";
 import Mineral from "@/components/Mineral";
 import Onsens from "@/components/Onsens";
+import NotABathBomb from "@/components/NotABathBomb";
 import Process from "@/components/Process";
 import Credibility from "@/components/Credibility";
 import FAQ from "@/components/FAQ";
@@ -24,6 +25,7 @@ export default function HomePage() {
         <Thermoregulation />
         <Mineral />
         <Onsens />
+        <NotABathBomb />
         <Process />
         <Credibility />
         <FAQ />

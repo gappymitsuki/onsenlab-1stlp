@@ -92,12 +92,19 @@ export default function Hero() {
 
         <div className="mt-10 flex items-center gap-6">
           <span className="h-px w-20 bg-copper" aria-hidden="true" />
+          {/* Sub-headline option C selected: names the category ("Japanese
+              onsen minerals" — Tatcha-style cultural anchor without JP
+              characters), makes the AI personalization explicit (the actual
+              differentiator vs Da Bomb), and ties to the primary outcome
+              (sleep). Tightest of the three candidates. JP cultural anchor
+              is preserved downstream in Footer ("Sourced in Japan · Shipped
+              from Tokyo") and in the kanji artifacts on the Onsens cards. */}
           <Reveal as="p" mode="fade" delay={0.6}>
             <span
               className="font-serif font-light italic text-mist"
               style={{ fontSize: "clamp(15px, 1.6vw, 22px)" }}
             >
-              An AI-prescribed onsen protocol, made for you.
+              Japanese onsen minerals, AI-matched to your sleep profile.
             </span>
           </Reveal>
         </div>

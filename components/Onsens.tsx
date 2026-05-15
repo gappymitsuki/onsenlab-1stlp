@@ -3,10 +3,13 @@
 import Reveal from "./Reveal";
 import VelocityMarquee from "./VelocityMarquee";
 
+// Romaji is the primary label (US-market trust); kanji rides along as a
+// small artifact so the JP cultural anchor isn't lost when the hero
+// sub-headline ships in English only.
 const sources = [
-  { name: "KUSATSU", lat: "36.622° N", pH: "2.08" },
-  { name: "BEPPU", lat: "33.279° N", pH: "6.04" },
-  { name: "GERO", lat: "35.806° N", pH: "8.92" },
+  { name: "KUSATSU", kanji: "草津", lat: "36.622° N", pH: "2.08" },
+  { name: "BEPPU",   kanji: "別府", lat: "33.279° N", pH: "6.04" },
+  { name: "GERO",    kanji: "下呂", lat: "35.806° N", pH: "8.92" },
 ];
 
 const marqueeNames = [
@@ -55,7 +58,16 @@ export default function Onsens() {
             <div className="absolute inset-0 bg-gradient-to-t from-sumi/70 via-sumi/20 to-transparent" />
             <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between">
               <div className="font-mono text-[10px] uppercase tracking-mono text-mist">
-                <div className="text-washi">{s.name}</div>
+                <div className="flex items-baseline gap-3 text-washi">
+                  <span>{s.name}</span>
+                  <span
+                    lang="ja"
+                    aria-hidden="true"
+                    className="font-display text-[14px] font-light text-mist normal-case tracking-normal"
+                  >
+                    {s.kanji}
+                  </span>
+                </div>
                 <div className="mt-1 tnum">
                   {s.lat} · pH {s.pH}
                 </div>

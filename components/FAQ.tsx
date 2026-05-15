@@ -28,10 +28,10 @@ const faqs: { q: string; a: string }[] = [
     q: "Do you ship outside the US?",
     a: "At launch: United States, Canada, Japan, United Kingdom, EU. Other markets follow within 90 days of public launch.",
   },
-  {
-    q: "What's the price?",
-    a: "$32–$58 per ritual depending on formulation complexity. Monthly subscription, cancel anytime. Single-purchase available at +20%.",
-  },
+  // "What's the price?" was removed from the FAQ; pricing is now disclosed
+  // openly in the PricingPreview section sitting between Process and
+  // Credibility. Don't add it back here — duplicate disclosure invites
+  // mismatches when the numbers shift.
 ];
 
 function Row({ index, q, a }: { index: number; q: string; a: string }) {

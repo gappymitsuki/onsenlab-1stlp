@@ -6,6 +6,7 @@ import Mineral from "@/components/Mineral";
 import Onsens from "@/components/Onsens";
 import NotABathBomb from "@/components/NotABathBomb";
 import Process from "@/components/Process";
+import PricingPreview from "@/components/PricingPreview";
 import Credibility from "@/components/Credibility";
 import FAQ from "@/components/FAQ";
 import FinalCTA from "@/components/FinalCTA";
@@ -27,6 +28,7 @@ export default function HomePage() {
         <Onsens />
         <NotABathBomb />
         <Process />
+        <PricingPreview tier1Price={45} trialPrice={35} />
         <Credibility />
         <FAQ />
         <FinalCTA />

@@ -10,6 +10,7 @@ import PricingPreview from "@/components/PricingPreview";
 import Credibility from "@/components/Credibility";
 import FAQ from "@/components/FAQ";
 import FinalCTA from "@/components/FinalCTA";
+import NinetyMinuteRitual from "@/components/NinetyMinuteRitual";
 import Footer from "@/components/Footer";
 import Cursor from "@/components/Cursor";
 import Preloader from "@/components/Preloader";
@@ -32,6 +33,7 @@ export default function HomePage() {
         <Credibility />
         <FAQ />
         <FinalCTA />
+        <NinetyMinuteRitual />
         <Footer />
       </main>
     </>

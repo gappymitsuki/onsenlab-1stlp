@@ -131,6 +131,14 @@ export default function Hero() {
             </span>
           </Link>
         </Reveal>
+
+        {/* Ritual axis — runs in parallel with the medical/protocol frame
+            above. Small, subordinate, but visible. */}
+        <Reveal as="p" mode="fade" delay={1.05} className="mt-6">
+          <span className="font-mono text-[10px] uppercase tracking-mono text-mist">
+            An evening ritual. Backed by sleep science.
+          </span>
+        </Reveal>
       </div>
 
       {/* TASK-12 — Bottom-right falling-light scroll indicator */}

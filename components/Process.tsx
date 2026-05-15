@@ -9,23 +9,30 @@ import { useEffect, useRef } from "react";
 import Reveal from "./Reveal";
 import { gsap, ScrollTrigger } from "@/lib/gsap-init";
 
+// Each step now carries a `ritual` micro-copy that runs in parallel with
+// the prescription/protocol/formula vocabulary. The pharmacology frame
+// (heading + body) stays primary; the ritual frame rides under it so the
+// "nightly ceremony" register coexists with the "measurable input" one.
 const steps = [
   {
     n: "01",
     en: "Answer 12 questions.",
     body: "Twelve questions translate your sleep, physiology, and seasonal context into a measurable profile.",
+    ritual: "About your sleep, your skin, your evening.",
     meta: "~ 90 SECONDS",
   },
   {
     n: "02",
     en: "AI matches your profile.",
     body: "Thousands of onsen mineral compositions are cross-referenced against your neural and metabolic signature.",
+    ritual: "To one of 47 onsen mineral profiles.",
     meta: "~ 5 SECONDS",
   },
   {
     n: "03",
-    en: "Receive your prescription.",
+    en: "Receive your bath formula.",
     body: "A formulation engraved with your name arrives — a single, unrepeatable onsen protocol.",
+    ritual: "And your nightly ritual begins.",
     meta: "Q3 2026 SHIPMENT",
   },
 ];
@@ -125,7 +132,16 @@ export default function Process() {
                   {s.en}
                 </Reveal>
               </h3>
-              <p className="mt-8 max-w-md font-serif text-[16px] font-light leading-[1.55] text-mineral md:text-[18px]">
+              {/* Ritual micro-copy — italic serif, small, paired immediately
+                  with the heading so the ceremony register lands before the
+                  pharmacology body copy. */}
+              <p
+                className="mt-4 max-w-md font-serif text-[15px] font-light italic leading-[1.55] text-copper md:text-[17px]"
+                lang="en"
+              >
+                {s.ritual}
+              </p>
+              <p className="mt-6 max-w-md font-serif text-[16px] font-light leading-[1.55] text-mineral md:text-[18px]">
                 {s.body}
               </p>
               <span className="mt-8 inline-block font-mono text-[11px] uppercase tracking-mono text-copper tnum">

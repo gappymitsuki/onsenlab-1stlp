@@ -2,14 +2,32 @@
 
 import Reveal from "./Reveal";
 
-const blocks = [
-  { label: "ADVISED BY", value: "Sleep Scientist", sub: "[name TBD]" },
-  { label: "SOURCED FROM", value: "5 Onsens", sub: "Kusatsu, Beppu, Gero +2" },
+// Pre-launch posture: surface only facts that are already true (sourcing,
+// the lab, shipping origin). Hide the advisor row until a name lands — a
+// single "[name TBD]" or "1 medical advisor" reads as weaker than not
+// claiming an advisor at all. When the advisor signs, pass it via props:
+//
+//   <Credibility advisor={{ value: "Dr. Yumi Sato", sub: "MD · Sleep Medicine" }} />
+//
+// The component will re-introduce the ADVISED BY block in the four-column
+// grid, no further code changes required.
+type Advisor = { value: string; sub: string };
+
+type Block = { label: string; value: string; sub: string };
+
+const BASE_BLOCKS: Block[] = [
+  { label: "SOURCED FROM", value: "5 Onsens",  sub: "Kusatsu, Beppu, Gero +2" },
   { label: "FORMULATED IN", value: "Tokyo Lab", sub: "Bunkyō-ku" },
-  { label: "SHIPPED FROM", value: "Tokyo", sub: "Narita Logistics" },
+  { label: "SHIPPED FROM",  value: "Tokyo",     sub: "Narita Logistics" },
 ];
 
-export default function Credibility() {
+export default function Credibility({ advisor }: { advisor?: Advisor }) {
+  const blocks: Block[] = advisor
+    ? [{ label: "ADVISED BY", value: advisor.value, sub: advisor.sub }, ...BASE_BLOCKS]
+    : BASE_BLOCKS;
+
+  const cols = blocks.length; // 3 pre-launch, 4 once advisor lands
+
   return (
     <section
       id="credibility"
@@ -21,21 +39,15 @@ export default function Credibility() {
           style={{ fontSize: "clamp(36px, 5vw, 72px)" }}
         >
           <Reveal as="span" mode="lines" duration={1.2}>
-            Sourced from 5 protected onsens.
-          </Reveal>
-          <br />
-          <Reveal as="span" mode="lines" duration={1.2} delay={0.15}>
-            Verified by 1 medical advisor in Beppu.
-          </Reveal>
-          <br />
-          <Reveal as="span" mode="lines" duration={1.2} delay={0.3}>
-            <span className="text-mist">
-              Tested in 1,000+ home rituals before launch.
-            </span>
+            Sourced from 5 protected onsens in Japan.
           </Reveal>
         </h2>
 
-        <div className="mt-24 grid grid-cols-2 md:mt-32 md:grid-cols-4">
+        <div
+          className={`mt-24 grid grid-cols-2 md:mt-32 ${
+            cols === 4 ? "md:grid-cols-4" : "md:grid-cols-3"
+          }`}
+        >
           {blocks.map((b, i) => (
             <div
               key={b.label}

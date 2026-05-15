@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import WhyNow from "@/components/WhyNow";
 import Thermoregulation from "@/components/Thermoregulation";
 import Mineral from "@/components/Mineral";
 import Onsens from "@/components/Onsens";
@@ -19,6 +20,7 @@ export default function HomePage() {
       <Header />
       <main>
         <Hero />
+        <WhyNow />
         <Thermoregulation />
         <Mineral />
         <Onsens />

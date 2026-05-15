@@ -46,14 +46,25 @@ export default function Hero() {
         aria-hidden="true"
       />
 
-      {/* Top-right tape — waitlist + batch */}
-      <div className="absolute right-6 top-[120px] z-10 flex flex-col items-end gap-2 md:right-[clamp(48px,6vw,120px)] md:top-[140px]">
+      {/* Waitlist badge — non-interactive social proof, deliberately ranked
+          a tier below the primary CTA (border-only, no fill, opacity 0.85)
+          so visual attention stays on "TAKE THE AI BATH QUIZ". Used to be
+          a two-line tape that read as a secondary CTA. */}
+      <div
+        role="status"
+        aria-label="Waitlist count and launch window"
+        className="absolute right-6 top-[120px] z-10 inline-flex flex-col items-end gap-2 border border-mist/40 px-3 py-2 md:right-[clamp(48px,6vw,120px)] md:top-[140px] md:flex-row md:items-center md:gap-3 md:px-4"
+        style={{ opacity: 0.85 }}
+      >
         <span className="font-mono text-[10px] uppercase tracking-mono text-mist">
-          WAITLIST <span className="ml-2 tnum text-washi">12,847</span>
+          <span className="tnum text-washi">12,847</span> reservations
         </span>
-        <span className="h-px w-12 bg-ash" />
+        <span
+          aria-hidden="true"
+          className="hidden h-3 w-px bg-mist/40 md:inline-block"
+        />
         <span className="font-mono text-[10px] uppercase tracking-mono text-mist">
-          NEXT BATCH <span className="ml-2 tnum text-washi">Q3 2026</span>
+          Launching <span className="tnum text-washi">Q3 2026</span>
         </span>
       </div>
 

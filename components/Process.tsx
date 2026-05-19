@@ -152,6 +152,26 @@ export default function Process() {
         ))}
       </ol>
 
+      {/* Closing visual — the moment Step 03 promises ("Receive your
+          bath formula") rendered as a single full-bleed plate before
+          the CTA. Caption left, image right on desktop; stacked on
+          mobile so the image leads. */}
+      <figure className="mx-auto max-w-[1920px] px-6 pt-24 md:px-[clamp(48px,6vw,120px)] md:pt-[160px]">
+        <div className="relative w-full overflow-hidden border-t border-bone bg-bone">
+          <img
+            src="/media/process-prescription.jpg"
+            alt="Receiving a personalized Onsen Labo bath formula — a card prescribed for Kusatsu, pH 2.08."
+            loading="lazy"
+            decoding="async"
+            className="block h-auto w-full object-cover"
+            style={{ aspectRatio: "16 / 9" }}
+          />
+        </div>
+        <figcaption className="mt-6 font-mono text-[10px] uppercase tracking-mono text-mineral md:mt-8">
+          STEP 03 · PRESCRIPTION CARD · KUSATSU · pH 2.08
+        </figcaption>
+      </figure>
+
       <div className="flex justify-center pb-32 pt-24 md:pb-[240px] md:pt-32">
         <Link
           href="/quiz"

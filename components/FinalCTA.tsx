@@ -34,8 +34,14 @@ export default function FinalCTA() {
       <div className="mx-auto flex min-h-[100svh] max-w-[1920px] flex-col items-center justify-center px-6 py-32 md:px-[clamp(48px,6vw,120px)] md:py-[200px]">
         {/* V6 plate — quiet midnight lab vial.
             TODO: drop /media/v6-vial.{webm,mp4}. Aspect 4:5 portrait. */}
+        {/* bg-sumi-deep on the wrapper guarantees the section never
+            renders as a blank rectangle if both the .webm/.mp4 and the
+            poster image fail. The other video plates (Hero, Onsens,
+            Thermoregulation) already sit on coloured wrappers
+            (bg-sumi / bg-stone-mid / bg-bone), so they're already
+            covered. */}
         <div
-          className="relative w-full max-w-[480px] overflow-hidden border border-copper/40"
+          className="relative w-full max-w-[480px] overflow-hidden border border-copper/40 bg-sumi-deep"
           style={{ aspectRatio: "4 / 5" }}
         >
           <video

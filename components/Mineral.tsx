@@ -42,6 +42,29 @@ export default function Mineral() {
           </div>
         </div>
 
+        {/* Plate — transdermal moment rendered. Sits between the "largest
+            organ" claim and the brownian ion field so the abstract
+            chemistry has a single human anchor immediately before the
+            particle visualization. 16:9 inside an ash-bordered frame to
+            match the visual language of the other photographic plates. */}
+        <figure className="mt-20 md:mt-28">
+          <div
+            className="relative w-full overflow-hidden border border-ash/40 bg-sumi-deep"
+            style={{ aspectRatio: "16 / 9" }}
+          >
+            <img
+              src="/media/mineral-skin.jpg"
+              alt="The mineral protocol carried through skin — at the threshold between the bath and the body."
+              loading="lazy"
+              decoding="async"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          </div>
+          <figcaption className="mt-6 font-mono text-[10px] uppercase tracking-mono text-mist md:mt-8">
+            TRANSDERMAL · MINERAL DELIVERY · IN PRACTICE
+          </figcaption>
+        </figure>
+
         {/* Brownian mineral ion field */}
         <div className="mt-32 md:mt-40">
           <MineralField />

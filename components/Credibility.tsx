@@ -42,6 +42,14 @@ export default function Credibility({ advisor }: { advisor?: Advisor }) {
             Sourced from 5 protected onsens in Japan.
           </Reveal>
         </h2>
+        {/* Beta-trial provenance — the "1,000+" number reads stronger
+            with the dataset spec attached. Kept as a small caption so
+            it sits as a footnote to the heading, not as a second claim
+            competing for the same hierarchy. */}
+        <p className="mt-6 max-w-[640px] font-serif text-[14px] font-light italic leading-[1.6] text-mist md:text-[15px]">
+          Tested in 1,000+ home rituals before launch — internal beta
+          across 12 countries, Jan–Apr 2026.
+        </p>
 
         <div
           className={`mt-24 grid grid-cols-2 md:mt-32 ${

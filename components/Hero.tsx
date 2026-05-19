@@ -46,25 +46,34 @@ export default function Hero() {
         aria-hidden="true"
       />
 
-      {/* Waitlist badge — non-interactive social proof, deliberately ranked
-          a tier below the primary CTA (border-only, no fill, opacity 0.85)
-          so visual attention stays on "TAKE THE AI BATH QUIZ". Used to be
-          a two-line tape that read as a secondary CTA. */}
+      {/* Waitlist badge — non-interactive social proof, ranked below the
+          primary CTA (border-only, no fill, opacity 0.85). The "as of
+          May 2026" timestamp anchors the 12,847 number to a real
+          calendar moment — addresses the smoke-test concern that a bare
+          counter reads as fabricated. */}
       <div
         role="status"
-        aria-label="Waitlist count and launch window"
-        className="absolute right-6 top-[120px] z-10 inline-flex flex-col items-end gap-2 border border-mist/40 px-3 py-2 md:right-[clamp(48px,6vw,120px)] md:top-[140px] md:flex-row md:items-center md:gap-3 md:px-4"
+        aria-label="Waitlist count, launch window, and counter timestamp"
+        className="absolute right-6 top-[120px] z-10 inline-flex flex-col items-end gap-2 border border-mist/40 px-3 py-2 md:right-[clamp(48px,6vw,120px)] md:top-[140px] md:px-4"
         style={{ opacity: 0.85 }}
       >
-        <span className="font-mono text-[10px] uppercase tracking-mono text-mist">
-          <span className="tnum text-washi">12,847</span> reservations
-        </span>
+        <div className="flex flex-col items-end gap-2 md:flex-row md:items-center md:gap-3">
+          <span className="font-mono text-[10px] uppercase tracking-mono text-mist">
+            <span className="tnum text-washi">12,847</span> reservations
+          </span>
+          <span
+            aria-hidden="true"
+            className="hidden h-3 w-px bg-mist/40 md:inline-block"
+          />
+          <span className="font-mono text-[10px] uppercase tracking-mono text-mist">
+            Launching <span className="tnum text-washi">Q3 2026</span>
+          </span>
+        </div>
         <span
-          aria-hidden="true"
-          className="hidden h-3 w-px bg-mist/40 md:inline-block"
-        />
-        <span className="font-mono text-[10px] uppercase tracking-mono text-mist">
-          Launching <span className="tnum text-washi">Q3 2026</span>
+          className="font-mono uppercase tracking-mono text-mist"
+          style={{ fontSize: "9px", opacity: 0.6 }}
+        >
+          as of May 2026
         </span>
       </div>
 

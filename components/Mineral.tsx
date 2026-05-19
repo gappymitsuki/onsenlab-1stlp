@@ -1,7 +1,6 @@
 "use client";
 
 import Reveal from "./Reveal";
-import MineralField from "./MineralField";
 
 export default function Mineral() {
   return (
@@ -65,10 +64,29 @@ export default function Mineral() {
           </figcaption>
         </figure>
 
-        {/* Brownian mineral ion field */}
-        <div className="mt-32 md:mt-40">
-          <MineralField />
-        </div>
+        {/* The action shot — the literal moment "transdermal mineral
+            delivery" describes. Replaces the prior abstract brownian-
+            ion animation that occupied this slot; an actual photograph
+            of the protocol being performed carries the claim with more
+            evidence and less decoration. 16:9 framed plate consistent
+            with the other section visuals. */}
+        <figure className="mt-32 md:mt-40">
+          <div
+            className="relative w-full overflow-hidden border border-ash/40 bg-sumi-deep"
+            style={{ aspectRatio: "16 / 9" }}
+          >
+            <img
+              src="/media/mineral-pour.jpg"
+              alt="Pouring an Onsen Labo mineral sachet into the bath — the moment of transdermal delivery."
+              loading="lazy"
+              decoding="async"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          </div>
+          <figcaption className="mt-6 font-mono text-[10px] uppercase tracking-mono text-mist md:mt-8">
+            ONSEN LABO · JAPAN · MINERAL BATH · 10 PACKS
+          </figcaption>
+        </figure>
       </div>
     </section>
   );

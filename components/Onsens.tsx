@@ -94,7 +94,7 @@ export default function Onsens() {
         </div>
         <div className="md:col-span-4 md:col-start-9 flex flex-col gap-8 self-end">
           <p className="font-serif text-[16px] font-light leading-[1.85] text-mist" lang="en">
-            Mineral profiles certified by Onsen Lab&apos;s lab in Tokyo. Sourced
+            Mineral profiles certified by Onsen Labo&apos;s lab in Tokyo. Sourced
             under partnerships with five protected hot springs.
           </p>
           <span className="h-px w-full bg-ash" />

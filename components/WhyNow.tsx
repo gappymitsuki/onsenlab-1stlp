@@ -2,7 +2,7 @@
 
 // Why-Now macro framing.
 // Sits between Hero and Thermoregulation: "your problem → world's problem
-// → mechanism → onsens → process". Anchors Onsen Lab inside the broader
+// → mechanism → onsens → process". Anchors Onsen Labo inside the broader
 // 2026 wellness shift (sleep-tech maturation, the rise of heat-exposure
 // protocols, the magnesium-on-TikTok wave, record inbound to Japan)
 // without name-checking individual influencers, brands, or competitors —
@@ -61,7 +61,7 @@ export default function WhyNow() {
             lang="en"
           >
             Wearables made sleep measurable. Pharmacology is racing to make
-            it prescriptive. Onsen Lab is building the third lane — a
+            it prescriptive. Onsen Labo is building the third lane — a
             non-pharma, mineral-based protocol with reproducible
             thermoregulation data behind it, delivered as a ritual you
             already know how to perform.

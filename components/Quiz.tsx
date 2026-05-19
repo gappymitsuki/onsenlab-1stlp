@@ -220,7 +220,7 @@ export default function Quiz() {
             href="/"
             className="font-display text-[16px] font-light tracking-tight text-washi transition-colors duration-200 hover:text-copper md:text-[18px]"
           >
-            Onsen Lab
+            Onsen Labo
           </Link>
           <span className="font-mono text-[10px] uppercase tracking-mono text-mist md:text-[11px]">
             {String(state.step + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
@@ -616,7 +616,7 @@ function EndScreen({ position }: { position: number | null }) {
                   <span className="mr-2 transition-transform duration-200 group-hover:-translate-x-1">
                     ←
                   </span>
-                  Return to Onsen Lab
+                  Return to Onsen Labo
                 </Link>
               </div>
             </motion.div>

@@ -72,7 +72,7 @@ export default function Hero() {
       <div className="relative z-10 flex h-full flex-col justify-end px-6 pb-20 md:px-[clamp(72px,7vw,148px)] md:pb-[12vh]">
         <Reveal as="p" mode="fade" delay={0.1}>
           <span className="block font-mono text-[10px] uppercase tracking-mono text-copper">
-            ONSEN LAB · SLEEP-TECH PROTOCOL · v1 · EST. 2026 · TOKYO
+            ONSEN LABO · SLEEP-TECH PROTOCOL · v1 · EST. 2026 · TOKYO
           </span>
         </Reveal>
 

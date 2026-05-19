@@ -20,11 +20,11 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Onsen Lab — Sleep, prescribed.",
+  title: "Onsen Labo — Sleep, prescribed.",
   description:
     "An AI-prescribed onsen protocol for sleep, sourced from five protected Japanese hot springs. Join 12,847 reservations.",
   openGraph: {
-    title: "Onsen Lab — Sleep, prescribed.",
+    title: "Onsen Labo — Sleep, prescribed.",
     description:
       "The world's first AI-prescribed mineral bath protocol. Sourced from five protected onsens.",
     type: "website",

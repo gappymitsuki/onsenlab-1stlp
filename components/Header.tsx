@@ -26,7 +26,7 @@ export default function Header() {
       <div className="mx-auto flex h-full max-w-[1920px] items-center justify-between px-6 md:px-[clamp(48px,6vw,120px)]">
         <Link
           href="/"
-          aria-label="Onsen Lab — home"
+          aria-label="Onsen Labo — home"
           data-cursor-label="HOME"
           className="block text-washi"
         >

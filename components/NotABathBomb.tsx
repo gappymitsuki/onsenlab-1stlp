@@ -16,7 +16,7 @@ type Row = {
   attribute: string;
   bathBomb: string;
   epsom: string;
-  onsenLab: string;
+  onsenLabo: string;
 };
 
 const rows: Row[] = [
@@ -24,38 +24,38 @@ const rows: Row[] = [
     attribute: "Active mineral content",
     bathBomb: "Dyes and fragrance",
     epsom: "Generic MgSO₄",
-    onsenLab: "5 onsen-sourced profiles",
+    onsenLabo: "5 onsen-sourced profiles",
   },
   {
     attribute: "Personalization",
     bathBomb: "None",
     epsom: "None",
-    onsenLab: "AI-matched per profile",
+    onsenLabo: "AI-matched per profile",
   },
   {
     attribute: "Sleep evidence",
     bathBomb: "Anecdotal",
     epsom: "Partial",
-    onsenLab: "Walker-lab thermoregulation",
+    onsenLabo: "Walker-lab thermoregulation",
   },
   {
     attribute: "Skin residue",
     bathBomb: "Dyes can stain",
     epsom: "Clean",
-    onsenLab: "Clean + onsen minerals",
+    onsenLabo: "Clean + onsen minerals",
   },
   {
     attribute: "Origin",
     bathBomb: "Mass production",
     epsom: "Commodity salt",
-    onsenLab: "Protected onsens, Japan",
+    onsenLabo: "Protected onsens, Japan",
   },
 ];
 
 const columns: { key: keyof Row; label: string; emphasis?: boolean }[] = [
   { key: "bathBomb", label: "Bath Bombs" },
   { key: "epsom",    label: "Epsom Salts" },
-  { key: "onsenLab", label: "Onsen Lab", emphasis: true },
+  { key: "onsenLabo", label: "Onsen Labo", emphasis: true },
 ];
 
 export default function NotABathBomb() {

@@ -1,4 +1,4 @@
-// Onsen Lab wordmark — text-only render of the brand mark.
+// Onsen Labo wordmark — text-only render of the brand mark.
 // Stylized steam glyph (3 arcs over a ripple) sits above the serif logotype,
 // matching the supplied brand reference.
 
@@ -33,7 +33,7 @@ export default function Wordmark({
     tone === "sumi" ? "var(--color-copper-leaf)" : "var(--color-copper)";
 
   return (
-    <div className={`inline-flex flex-col items-center ${gap}`} aria-label="Onsen Lab">
+    <div className={`inline-flex flex-col items-center ${gap}`} aria-label="Onsen Labo">
       {showSteam && (
         <svg
           width={glyph * 1.4}
@@ -82,7 +82,7 @@ export default function Wordmark({
       <span
         className={`font-display font-light leading-none tracking-tight ${type} ${typeColor}`}
       >
-        Onsen Lab
+        Onsen Labo
       </span>
     </div>
   );

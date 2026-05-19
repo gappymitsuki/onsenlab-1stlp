@@ -108,7 +108,7 @@ export default function Preloader() {
           className="font-display font-light text-washi"
           style={{ fontSize: 28, letterSpacing: "-0.02em" }}
         >
-          Onsen Lab
+          Onsen Labo
         </span>
       </div>
 
@@ -125,7 +125,7 @@ export default function Preloader() {
         className="absolute bottom-8 right-8 font-mono text-[10px] uppercase text-mineral"
         style={{ letterSpacing: "0.2em" }}
       >
-        ONSEN LAB · INITIALISING PROTOCOL
+        ONSEN LABO · INITIALISING PROTOCOL
       </span>
     </div>
   );

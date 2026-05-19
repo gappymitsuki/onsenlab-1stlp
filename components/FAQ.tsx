@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import Reveal from "./Reveal";
 
-// The "How is Onsen Lab different from LUSH?" row was removed in favor of
+// The "How is Onsen Labo different from LUSH?" row was removed in favor of
 // a dedicated NotABathBomb section between Onsens and Process — see
 // components/NotABathBomb.tsx. Don't add it back here.
 const faqs: { q: string; a: string }[] = [

@@ -61,7 +61,7 @@ export default function Footer() {
 
         <div className="mt-8 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
           <p className="font-mono text-[10px] uppercase tracking-mono text-mineral">
-            © 2026 ONSEN LAB CO., LTD.
+            © 2026 ONSEN LABO CO., LTD.
             <br />
             REGISTERED IN TOKYO, BUNKYO-KU
           </p>

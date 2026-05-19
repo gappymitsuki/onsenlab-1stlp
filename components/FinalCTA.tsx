@@ -61,23 +61,28 @@ export default function FinalCTA() {
           />
         </div>
 
+        {/* Headline reframed: the page-level primary action is the Quiz
+            (Hero CTA + Process CTA). The email form is now positioned as
+            the explicit fallback for fence-sitters — same component, but
+            it no longer competes with the Quiz for primary intent. */}
         <h2
-          className="mt-16 max-w-5xl text-center font-display font-light leading-[0.98] tracking-display"
-          style={{ fontSize: "clamp(48px, 10vw, 160px)" }}
+          className="mt-16 max-w-5xl text-center font-display font-light leading-[1.0] tracking-display"
+          style={{ fontSize: "clamp(36px, 6.4vw, 96px)" }}
         >
           <Reveal as="span" mode="lines" duration={1.4}>
-            Your prescription
+            Not ready for the quiz?
             <br />
-            <span className="text-copper">is waiting.</span>
+            <span className="text-copper">Reserve your spot.</span>
           </Reveal>
         </h2>
 
         <Reveal as="p" mode="fade" delay={0.25} className="mt-10">
           <span
-            className="block text-center font-serif font-light italic text-mist"
+            className="block max-w-2xl text-center font-serif font-light italic text-mist"
             style={{ fontSize: "clamp(15px, 1.6vw, 22px)" }}
           >
-            Your formulation is already in preparation.
+            Skip the quiz for now — enter your email and we&apos;ll notify
+            you at launch.
           </span>
         </Reveal>
 

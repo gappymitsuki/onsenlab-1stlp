@@ -123,6 +123,7 @@ export default function Hero() {
           <Link
             href="/quiz"
             data-cursor-label="ENTER"
+            data-track="cta_quiz_hero"
             className="group relative inline-flex h-16 w-[320px] items-center justify-between overflow-hidden border border-copper pl-7 pr-6 font-mono text-[11px] uppercase tracking-mono text-washi"
           >
             <span

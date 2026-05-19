@@ -116,6 +116,7 @@ export default function FinalCTA() {
             type="submit"
             disabled={state === "submitting" || state === "done"}
             data-cursor-label="RESERVE"
+            data-track="cta_email_reserve"
             className="group relative inline-flex h-16 w-full items-center justify-between overflow-hidden border border-copper px-6 font-mono text-[10px] uppercase tracking-mono text-washi md:w-[200px] md:self-center"
           >
             <span

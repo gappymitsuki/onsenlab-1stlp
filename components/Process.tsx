@@ -156,6 +156,7 @@ export default function Process() {
         <Link
           href="/quiz"
           data-cursor-label="ENTER"
+          data-track="cta_quiz_midpage"
           className="group relative inline-flex h-16 items-center justify-between gap-8 overflow-hidden border border-sumi pl-7 pr-6 font-mono text-[10px] uppercase tracking-mono text-sumi"
         >
           <span

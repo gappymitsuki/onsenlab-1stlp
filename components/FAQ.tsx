@@ -46,6 +46,8 @@ function Row({ index, q, a }: { index: number; q: string; a: string }) {
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         data-cursor-label={open ? "CLOSE" : "OPEN"}
+        data-track="faq_open"
+        data-faq-id={`q${String(index + 1).padStart(2, "0")}`}
         className="group flex w-full items-baseline gap-6 py-10 text-left md:gap-10 md:py-12"
       >
         <span className="shrink-0 font-mono text-[10px] uppercase tracking-mono text-mineral tnum">

@@ -190,7 +190,14 @@ export default function Quiz() {
           const res = await fetch("/api/quiz-submit", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ answers: state.answers }),
+            body: JSON.stringify({
+              answers: state.answers,
+              // Forwarded to /lib/sheets so the Google Sheet captures
+              // browser context. Country is filled server-side from the
+              // cf-ipcountry header.
+              referrer: typeof document !== "undefined" ? document.referrer : "",
+              userAgent: typeof navigator !== "undefined" ? navigator.userAgent : "",
+            }),
           });
           if (res.ok) {
             const data = await res.json().catch(() => ({}));

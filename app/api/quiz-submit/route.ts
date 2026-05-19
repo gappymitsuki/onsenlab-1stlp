@@ -2,21 +2,27 @@ import { NextResponse } from "next/server";
 import { matchProfile } from "@/lib/email/matching";
 import { addContact, sendEmail } from "@/lib/email/resend";
 import { email1Html, email1Subject } from "@/lib/email/templates";
+import { sendQuizToSheets } from "@/lib/sheets";
 
 export const runtime = "edge";
 
 type Body = {
   answers?: Record<string, unknown>;
+  referrer?: string;
+  userAgent?: string;
 };
 
+// The Quiz stores the email response under question id `contact` as
+// `{ name?: string; email: string }`. Fall back to a top-level `email`
+// or to a legacy `email_q` key in case any caller still posts the older
+// shape.
 function extractEmail(answers: Record<string, unknown>): string | null {
-  // The Quiz schema stores the email response under `email_q` as
-  // `{ name?: string; email: string }`. Fall back to a top-level `email`
-  // if a different caller submits manually.
-  const eq = answers["email_q"];
-  if (eq && typeof eq === "object" && "email" in eq) {
-    const e = String((eq as { email?: unknown }).email ?? "").trim();
-    if (e) return e;
+  for (const key of ["contact", "email_q"]) {
+    const v = answers[key];
+    if (v && typeof v === "object" && "email" in v) {
+      const e = String((v as { email?: unknown }).email ?? "").trim();
+      if (e) return e;
+    }
   }
   const direct = answers["email"];
   if (typeof direct === "string" && direct.trim()) return direct.trim();
@@ -24,11 +30,19 @@ function extractEmail(answers: Record<string, unknown>): string | null {
 }
 
 function extractName(answers: Record<string, unknown>): string {
-  const eq = answers["email_q"];
-  if (eq && typeof eq === "object" && "name" in eq) {
-    return String((eq as { name?: unknown }).name ?? "").trim();
+  for (const key of ["contact", "email_q"]) {
+    const v = answers[key];
+    if (v && typeof v === "object" && "name" in v) {
+      return String((v as { name?: unknown }).name ?? "").trim();
+    }
   }
   return "";
+}
+
+// Cloudflare populates cf-ipcountry on every edge request; fallback for
+// non-Cloudflare environments is an empty string (column stays blank).
+function extractCountry(request: Request): string {
+  return request.headers.get("cf-ipcountry") ?? "";
 }
 
 export async function POST(request: Request) {
@@ -52,10 +66,14 @@ export async function POST(request: Request) {
     `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://onsenlab-1stlp.pages.dev"}` +
     `/api/unsubscribe?email=${encodeURIComponent(email)}`;
 
-  // Fire-and-forget the two outbound calls in parallel. Audience add can
-  // 409 on duplicate; sendEmail logs its own failures. Neither is allowed
-  // to block the visitor — they always see ok+position.
-  const [emailRes, contactRes] = await Promise.allSettled([
+  const referrer = body.referrer ?? request.headers.get("referer") ?? "";
+  const userAgent = body.userAgent ?? request.headers.get("user-agent") ?? "";
+  const country = extractCountry(request);
+
+  // Fire all three sinks in parallel. Each fails closed: Resend retries
+  // internally on its end, Sheets logs + returns false. Visitor always
+  // sees ok + their RX number regardless of which sink misbehaves.
+  const [emailRes, contactRes, sheetsRes] = await Promise.allSettled([
     sendEmail({
       to: email,
       subject: email1Subject(match.rxNumber),
@@ -66,6 +84,16 @@ export async function POST(request: Request) {
       firstName: name,
       unsubscribed: false,
     }),
+    sendQuizToSheets({
+      email,
+      rxNumber: match.rxNumber,
+      onsen: match.onsen,
+      formulation: match.formulation,
+      answers,
+      referrer,
+      userAgent,
+      country,
+    }),
   ]);
 
   console.log("[quiz-submit]", {
@@ -75,6 +103,7 @@ export async function POST(request: Request) {
     formulation: match.formulation,
     emailSent: emailRes.status === "fulfilled" && emailRes.value !== null,
     contactAdded: contactRes.status === "fulfilled" && contactRes.value !== null,
+    sheetsLogged: sheetsRes.status === "fulfilled" && sheetsRes.value === true,
   });
 
   return NextResponse.json({

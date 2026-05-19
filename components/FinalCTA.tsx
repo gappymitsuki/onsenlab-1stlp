@@ -17,7 +17,13 @@ export default function FinalCTA() {
       const res = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, source: "final-cta" }),
+        body: JSON.stringify({
+          email,
+          source: "final-cta",
+          // Captured server-side into the lp_leads sheet.
+          referrer: typeof document !== "undefined" ? document.referrer : "",
+          userAgent: typeof navigator !== "undefined" ? navigator.userAgent : "",
+        }),
       });
       if (!res.ok) throw new Error("non-200");
       setState("done");

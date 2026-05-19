@@ -101,6 +101,13 @@ export default function Onsens() {
           <span className="font-mono text-[10px] uppercase tracking-mono text-copper tnum">
             LAT 36.622° N · LON 138.596° E · pH 2.08 · SO₄²⁻ 1,432 mg/L
           </span>
+          {/* Closes the gap between the marquee (5 names) and the body
+              copy (3 plates). Without this line the "+2" is left as an
+              unanswered question. */}
+          <span className="font-mono text-[10px] uppercase tracking-mono text-mineral">
+            NOBORIBETSU · HAKONE — sourcing partnerships in final
+            confirmation. Full five-onsen lineup announced at launch.
+          </span>
         </div>
       </div>
 

@@ -25,8 +25,8 @@ const faqs: { q: string; a: string }[] = [
     a: "First production run ships Q3 2026. Waitlist position determines order. Referrals advance your position 50 spots per share.",
   },
   {
-    q: "Do you ship outside the US?",
-    a: "At launch: United States, Canada, Japan, United Kingdom, EU. Other markets follow within 90 days of public launch.",
+    q: "Do you ship internationally?",
+    a: "Yes. Onsen Labo ships worldwide from Tokyo. International shipping rates and timelines will be confirmed at launch (Q3 2026). Founding Members outside the US are welcome — you'll receive tracking and customs documentation with every shipment.",
   },
   // Price answer kept verbatim from Business Plan v1.0 §6.1. Numbers
   // here MUST match components/PricingPreview.tsx — if one moves, move

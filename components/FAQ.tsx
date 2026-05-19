@@ -28,10 +28,13 @@ const faqs: { q: string; a: string }[] = [
     q: "Do you ship outside the US?",
     a: "At launch: United States, Canada, Japan, United Kingdom, EU. Other markets follow within 90 days of public launch.",
   },
-  // "What's the price?" was removed from the FAQ; pricing is now disclosed
-  // openly in the PricingPreview section sitting between Process and
-  // Credibility. Don't add it back here — duplicate disclosure invites
-  // mismatches when the numbers shift.
+  // Price answer kept verbatim from Business Plan v1.0 §6.1. Numbers
+  // here MUST match components/PricingPreview.tsx — if one moves, move
+  // the other in the same commit.
+  {
+    q: "What's the price?",
+    a: "Founding Members: $89/month — 14 bath sachets + handwritten Founder Letter, curated by Mitsuki. Limited to the first cohort. Standard: $55/month — 8–10 AI-personalized bath sachets + Prescription Card. Launches Q3 2026. No commitment. Cancel anytime before your next shipment.",
+  },
 ];
 
 function Row({ index, q, a }: { index: number; q: string; a: string }) {

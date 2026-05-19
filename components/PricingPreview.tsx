@@ -1,21 +1,48 @@
 "use client";
 
-// Pre-launch price disclosure. Hiding the price behind a collapsed FAQ
-// row is the #1 documented exit reason on D2C waitlist LPs. Surfaces the
-// monthly tier + the trial-box price plainly. Numbers come from props so
-// pricing decisions live in app/page.tsx, not in copy.
+// Pre-launch price disclosure — two-tier per Business Plan v1.0 §6.1.
+// Hiding price behind a FAQ row is the #1 documented exit reason on
+// D2C waitlist LPs; we surface both tiers plainly and let the FAQ
+// answer carry the longer-form repeat for visitors who land there
+// without scrolling through Process. All numbers come from props so a
+// pricing change is a one-line edit in app/page.tsx.
 
 import Reveal from "./Reveal";
 
+type Tier = {
+  price: number;
+  label: string;
+  sachets: string;
+  extra: string;
+  meta: string;
+};
+
 export default function PricingPreview({
-  tier1Price = 45,
-  trialPrice = 35,
+  founding = {
+    price: 89,
+    label: "Founding Members",
+    sachets: "14 bath sachets",
+    extra: "Handwritten Founder Letter, curated by Mitsuki",
+    meta: "Limited to the first cohort",
+  },
+  standard = {
+    price: 55,
+    label: "Standard",
+    sachets: "8–10 AI-personalized bath sachets",
+    extra: "Prescription Card",
+    meta: "Launches Q3 2026",
+  },
   currency = "$",
 }: {
-  tier1Price?: number;
-  trialPrice?: number;
+  founding?: Tier;
+  standard?: Tier;
   currency?: string;
 }) {
+  const tiers: (Tier & { emphasis?: boolean })[] = [
+    { ...founding, emphasis: true },
+    { ...standard },
+  ];
+
   return (
     <section
       id="pricing"
@@ -30,46 +57,53 @@ export default function PricingPreview({
             </span>
           </Reveal>
 
-          <div className="mt-10 grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-16">
-            <div className="md:col-span-7">
-              <p
-                className="font-display font-light leading-[1.05] tracking-tight text-sumi"
-                style={{ fontSize: "clamp(28px, 3.6vw, 56px)" }}
-              >
-                <Reveal as="span" mode="lines" duration={1.0}>
-                  Subscription starts at{" "}
-                  <span className="text-copper tnum">
-                    {currency}
-                    {tier1Price}
-                  </span>{" "}
-                  / month.
-                </Reveal>
-              </p>
-              <p className="mt-6 font-serif text-[16px] font-light leading-[1.7] text-mineral md:text-[18px]">
-                First box:{" "}
-                <span className="text-sumi tnum">
-                  {currency}
-                  {trialPrice}
-                </span>{" "}
-                trial · Cancel anytime.
-              </p>
-            </div>
+          <h3
+            className="mt-8 max-w-[1100px] font-display font-light leading-[1.05] tracking-tight text-sumi"
+            style={{ fontSize: "clamp(28px, 3.6vw, 56px)" }}
+          >
+            <Reveal as="span" mode="lines" duration={1.0}>
+              Two tiers. One protocol.
+            </Reveal>
+          </h3>
 
-            <ul className="md:col-span-4 md:col-start-9 flex flex-col gap-4 self-end font-mono text-[10px] uppercase tracking-mono text-mineral">
-              <li className="flex items-baseline gap-3">
-                <span className="text-copper">·</span>
-                <span>1 prescription / month</span>
-              </li>
-              <li className="flex items-baseline gap-3">
-                <span className="text-copper">·</span>
-                <span>Ships from Tokyo</span>
-              </li>
-              <li className="flex items-baseline gap-3">
-                <span className="text-copper">·</span>
-                <span>Pause or cancel in one click</span>
-              </li>
-            </ul>
+          <div className="mt-14 grid grid-cols-1 gap-10 md:mt-16 md:grid-cols-2 md:gap-16">
+            {tiers.map((t) => (
+              <div
+                key={t.label}
+                className={`flex flex-col gap-5 border-t pt-8 md:pt-10 ${
+                  t.emphasis ? "border-copper" : "border-bone"
+                }`}
+              >
+                <span
+                  className={`font-mono text-[10px] uppercase tracking-mono ${
+                    t.emphasis ? "text-copper" : "text-mineral"
+                  }`}
+                >
+                  {t.label}
+                </span>
+                <p
+                  className="font-display font-light leading-none tracking-tight text-sumi tnum"
+                  style={{ fontSize: "clamp(48px, 5.5vw, 80px)" }}
+                >
+                  {currency}
+                  {t.price}
+                  <span className="ml-2 font-mono text-[12px] uppercase tracking-mono text-mineral">
+                    / month
+                  </span>
+                </p>
+                <p className="max-w-[420px] font-serif text-[16px] font-light leading-[1.55] text-mineral md:text-[17px]">
+                  {t.sachets} · {t.extra}.
+                </p>
+                <span className="font-mono text-[10px] uppercase tracking-mono text-mineral tnum">
+                  {t.meta}
+                </span>
+              </div>
+            ))}
           </div>
+
+          <p className="mt-12 font-mono text-[10px] uppercase tracking-mono text-mineral">
+            No commitment · Cancel anytime before your next shipment
+          </p>
         </div>
       </div>
     </section>

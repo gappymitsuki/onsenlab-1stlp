@@ -29,7 +29,7 @@ export default function HomePage() {
         <Onsens />
         <NotABathBomb />
         <Process />
-        <PricingPreview tier1Price={45} trialPrice={35} />
+        <PricingPreview />
         <Credibility
           advisor={{
             value: "Sleep Scientist",

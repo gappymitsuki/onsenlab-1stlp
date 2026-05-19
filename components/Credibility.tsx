@@ -1,83 +1,62 @@
 "use client";
 
+// Spec-locked: four label/value rows, nothing else.
+//
+// No headline, no caption, no advisor row, no Tokyo Lab / Bunkyō-ku /
+// Narita Logistics operational detail. Each row is a horizontal pair —
+// small mono label on the left, value on the right — separated by a
+// hairline. The shape is intentionally flat: this section is the
+// receipt at the bottom of the page, not a sales argument.
+
 import Reveal from "./Reveal";
 
-// Pre-launch posture: surface only facts that are already true (sourcing,
-// the lab, shipping origin). Hide the advisor row until a name lands — a
-// single "[name TBD]" or "1 medical advisor" reads as weaker than not
-// claiming an advisor at all. When the advisor signs, pass it via props:
-//
-//   <Credibility advisor={{ value: "Dr. Yumi Sato", sub: "MD · Sleep Medicine" }} />
-//
-// The component will re-introduce the ADVISED BY block in the four-column
-// grid, no further code changes required.
-type Advisor = { value: string; sub: string };
-
-type Block = { label: string; value: string; sub: string };
-
-const BASE_BLOCKS: Block[] = [
-  { label: "SOURCED FROM", value: "5 Onsens",  sub: "Kusatsu, Beppu, Gero +2" },
-  { label: "FORMULATED IN", value: "Tokyo Lab", sub: "Bunkyō-ku" },
-  { label: "SHIPPED FROM",  value: "Tokyo",     sub: "Narita Logistics" },
+const rows: { label: string; value: string }[] = [
+  {
+    label: "INSPIRED BY",
+    value: "Kusatsu · Beppu · Gero · Noboribetsu · Hakone",
+  },
+  {
+    label: "CURATED IN",
+    value: "Tokyo, Japan",
+  },
+  {
+    label: "SHIPS FROM",
+    value: "Tokyo → Worldwide",
+  },
+  {
+    label: "BETA",
+    value: "1,000+ rituals · 12 countries",
+  },
 ];
 
-export default function Credibility({ advisor }: { advisor?: Advisor }) {
-  const blocks: Block[] = advisor
-    ? [{ label: "ADVISED BY", value: advisor.value, sub: advisor.sub }, ...BASE_BLOCKS]
-    : BASE_BLOCKS;
-
-  const cols = blocks.length; // 3 pre-launch, 4 once advisor lands
-
+export default function Credibility() {
   return (
     <section
       id="credibility"
       className="relative w-full bg-sumi text-washi border-t border-ash"
     >
       <div className="mx-auto max-w-[1920px] px-6 py-32 md:px-[clamp(48px,6vw,120px)] md:py-[200px]">
-        <h2
-          className="max-w-[1100px] font-display font-light leading-[1.05] tracking-tight"
-          style={{ fontSize: "clamp(36px, 5vw, 72px)" }}
-        >
-          <Reveal as="span" mode="lines" duration={1.2}>
-            Sourced from 5 protected onsens in Japan.
-          </Reveal>
-        </h2>
-        {/* Beta-trial provenance — the "1,000+" number reads stronger
-            with the dataset spec attached. Kept as a small caption so
-            it sits as a footnote to the heading, not as a second claim
-            competing for the same hierarchy. */}
-        <p className="mt-6 max-w-[640px] font-serif text-[14px] font-light italic leading-[1.6] text-mist md:text-[15px]">
-          Tested in 1,000+ home rituals before launch — internal beta
-          across 12 countries, Jan–Apr 2026.
-        </p>
-
-        <div
-          className={`mt-24 grid grid-cols-2 md:mt-32 ${
-            cols === 4 ? "md:grid-cols-4" : "md:grid-cols-3"
-          }`}
-        >
-          {blocks.map((b, i) => (
-            <div
-              key={b.label}
-              className={`flex flex-col gap-6 px-2 py-10 md:py-0 md:px-8 ${
-                i > 0 ? "md:border-l border-ash" : ""
-              } ${i % 2 === 1 ? "border-l border-ash md:border-l" : ""} ${
-                i >= 2 ? "border-t border-ash md:border-t-0" : ""
-              }`}
+        <ul className="border-t border-ash">
+          {rows.map((r) => (
+            <li
+              key={r.label}
+              className="grid grid-cols-1 gap-3 border-b border-ash py-10 md:grid-cols-12 md:items-baseline md:gap-12 md:py-12"
             >
-              <span className="font-mono text-[10px] uppercase tracking-mono text-mineral">
-                {b.label}
+              <span className="md:col-span-3 font-mono text-[10px] uppercase tracking-mono text-mineral">
+                {r.label}
               </span>
-              <span className="h-px w-8 bg-copper" />
-              <span className="font-display text-[24px] font-light text-washi">
-                {b.value}
-              </span>
-              <span className="font-mono text-[10px] uppercase tracking-mono text-mist">
-                {b.sub}
-              </span>
-            </div>
+              <Reveal
+                as="span"
+                mode="fade"
+                className="md:col-span-9 block font-display font-light tracking-tight text-washi"
+              >
+                <span style={{ fontSize: "clamp(20px, 2.2vw, 30px)" }}>
+                  {r.value}
+                </span>
+              </Reveal>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );

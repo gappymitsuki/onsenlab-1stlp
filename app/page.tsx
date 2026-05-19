@@ -30,12 +30,7 @@ export default function HomePage() {
         <NotABathBomb />
         <Process />
         <PricingPreview />
-        <Credibility
-          advisor={{
-            value: "Sleep Scientist",
-            sub: "Onsen Medical Advisor (announcement Q3 2026)",
-          }}
-        />
+        <Credibility />
         <FAQ />
         <FinalCTA />
         <NinetyMinuteRitual />
